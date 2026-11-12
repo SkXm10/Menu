@@ -3,106 +3,217 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>学園祭 Webサイト展示</title>
+<title>学園祭 Webサイト展示 | Nepal × Bangladesh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+<!-- 先に読み込んでおくと、ボタンを押したあとの表示が速くなります -->
+<link rel="prefetch" href="https://skxm10.github.io/ProjectNepal/">
+<link rel="prefetch" href="https://rana1539.github.io/JOY-BANGLA/">
 <style>
+  :root{
+    --ink:#1A2B4A; --muted:#4A5B74; --line:#DCE5EE;
+    --blue:#2B6CB0; --blue-tint:#EAF2FB; --blue-deep:#1E4E86;
+    --green:#1F7A4D; --green-tint:#E7F4EC; --green-deep:#155C39;
+  }
   *{box-sizing:border-box}
-  html,body{min-height:100%;margin:0}
+  html,body{margin:0;min-height:100%}
   body{
-    background:#F7FAF8;
-    color:#1A2B4A;
+    min-height:100vh;
+    color:var(--ink);
     font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
-    font-size:16px;line-height:1.6;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;
-    border-top:10px solid;border-image:linear-gradient(90deg,#2B6CB0 50%,#1F7A4D 50%) 1;
+    font-size:16px;line-height:1.7;
+    background:
+      radial-gradient(ellipse 60% 55% at 12% 0%, #D6E7F8 0%, transparent 70%),
+      radial-gradient(ellipse 60% 55% at 88% 0%, #D3EEDD 0%, transparent 70%),
+      #F7FAF8;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    border-top:10px solid;border-image:linear-gradient(90deg,var(--blue) 50%,var(--green) 50%) 1;
   }
-  .wrap{width:100%;max-width:1200px;padding:40px 28px 48px}
+  .sprite{position:absolute;width:0;height:0;overflow:hidden}
+
+  .wrap{width:100%;max-width:1180px;padding:36px 28px 40px}
+
+  /* ---------- header ---------- */
   header{text-align:center}
-  .label{color:#44546F;font-weight:700;letter-spacing:.4em;font-size:17px}
-  h1{margin:8px 0 0;font-size:clamp(30px,4.2vw,54px);line-height:1.3}
-  main{
-    display:grid;grid-template-columns:1fr 1fr;gap:24px;
-    margin-top:36px;
-  }
+  .pair{display:inline-flex;align-items:center;gap:18px;margin-bottom:14px}
+  .pair svg{height:46px;width:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.22))}
+  .pair .x{font-size:26px;font-weight:700;color:var(--muted)}
+  .label{color:var(--muted);font-weight:700;letter-spacing:.4em;font-size:15px}
+  h1{margin:6px 0 0;font-size:clamp(30px,4.2vw,54px);line-height:1.3;font-weight:900;letter-spacing:.02em}
+  .lead{margin:10px auto 0;max-width:640px;color:var(--muted);font-size:17px}
+
+  /* ---------- cards ---------- */
+  main{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:34px}
   a.card{
-    display:flex;flex-direction:column;gap:22px;
-    background:#fff;color:#1A2B4A;text-decoration:none;
-    border-radius:14px;border-top:8px solid var(--accent);
-    box-shadow:0 6px 20px rgba(26,43,74,.10);
-    padding:28px 32px 32px;
-    transition:transform .15s, box-shadow .15s;
+    --accent:var(--blue); --tint:var(--blue-tint); --deep:var(--blue-deep);
+    display:flex;flex-direction:column;
+    background:#fff;color:var(--ink);text-decoration:none;
+    border-radius:20px;overflow:hidden;
+    border:1px solid var(--line);
+    box-shadow:0 10px 30px rgba(26,43,74,.10);
+    transition:transform .18s ease, box-shadow .18s ease;
   }
-  a.card:hover,a.card:focus-visible{transform:translateY(-4px);box-shadow:0 12px 28px rgba(26,43,74,.18);outline:none}
-  .flag{height:88px;display:flex;align-items:center}
-  .flag svg{height:100%;width:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.2))}
-  .group{color:var(--accent);font-weight:700;font-size:17px;letter-spacing:.1em}
-  .name{font-weight:700;font-size:clamp(24px,2.8vw,36px);line-height:1.3;margin:2px 0 10px}
-  .desc{font-size:18px;line-height:1.7;color:#44546F}
-  .go{
-    align-self:flex-start;margin-top:auto;border-radius:999px;
+  a.card.bd{--accent:var(--green); --tint:var(--green-tint); --deep:var(--green-deep)}
+  a.card:hover,a.card:focus-visible{transform:translateY(-6px);box-shadow:0 18px 40px rgba(26,43,74,.18);outline:none}
+  a.card:focus-visible{box-shadow:0 0 0 4px #fff,0 0 0 8px var(--accent)}
+  a.card:active{transform:translateY(-2px) scale(.995)}
+
+  .band{
+    background:var(--tint);
+    padding:22px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    border-bottom:4px solid var(--accent);
+  }
+  .band svg{height:92px;width:auto;filter:drop-shadow(0 3px 6px rgba(0,0,0,.22))}
+  .badge{
     background:var(--accent);color:#fff;font-weight:700;
-    font-size:19px;padding:12px 28px;
+    font-size:15px;letter-spacing:.12em;padding:6px 16px;border-radius:999px;white-space:nowrap;
   }
-  @media (max-width:760px){ main{grid-template-columns:1fr} }
+  .body{padding:26px 30px 30px;display:flex;flex-direction:column;flex:1;gap:14px}
+  .name{font-weight:900;font-size:clamp(26px,2.9vw,38px);line-height:1.25;margin:0}
+  .desc{font-size:18px;line-height:1.75;color:var(--muted);margin:0}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 6px;padding:0;list-style:none}
+  .tags li{background:var(--tint);color:var(--deep);font-weight:700;font-size:14px;padding:4px 12px;border-radius:999px}
+  .go{
+    margin-top:auto;align-self:flex-start;
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--accent);color:#fff;font-weight:700;font-size:19px;
+    padding:13px 30px;border-radius:999px;
+    box-shadow:0 6px 14px rgba(26,43,74,.22);
+  }
+  .go .arrow{display:inline-block;transition:transform .18s ease}
+  a.card:hover .arrow,a.card:focus-visible .arrow{transform:translateX(6px)}
+  a.card.opening .go{opacity:.75}
+
+  /* ---------- steps + footer ---------- */
+  .steps{
+    list-style:none;margin:34px auto 0;padding:0;
+    display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+  }
+  .steps li{
+    display:flex;align-items:center;gap:10px;
+    background:#fff;border:1px solid var(--line);border-radius:999px;
+    padding:8px 18px 8px 10px;font-size:15px;font-weight:500;color:var(--muted);
+  }
+  .steps b{
+    width:26px;height:26px;border-radius:50%;
+    background:var(--ink);color:#fff;font-size:14px;
+    display:inline-flex;align-items:center;justify-content:center;
+  }
+  footer{margin-top:22px;text-align:center;color:var(--muted);font-size:14px;letter-spacing:.08em}
+
+  #offline{
+    display:none;position:fixed;left:50%;bottom:20px;transform:translateX(-50%);
+    background:#B3261E;color:#fff;font-weight:700;padding:12px 22px;border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,.3);z-index:10;font-size:16px;
+  }
+
+  @media (max-width:820px){
+    main{grid-template-columns:1fr}
+    .band svg{height:76px}
+  }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important} }
 </style>
 </head>
 <body>
 
+<!-- 国旗（そのまま・変更しなくてOK） -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="flag-nepal" viewBox="-4 -20 410 520"><g transform="matrix(1.0432 0 0 1.0432 -.0024051 -21.45)"><path d="m6.2712 489.83 363.1-0.01-237.66-241.01 246.61 0.29-372.03-237.62-0.0188 478.35z" fill="#DC143C" stroke="#003893" stroke-width="12.431" stroke-linejoin="miter" fill-rule="evenodd"></path><path d="m 296.97868,523.24292 -21.02922,7.1358 16.4532,15.86944 -22.15922,-1.45491 9.1278,20.95781 -19.91568,-9.82413 0.41278,22.85555 -14.64016,-16.69771 -8.36508,21.27374 -7.1358,-21.02923 -15.86944,16.4532 1.45491,-22.15922 -20.95781,9.1278 9.82413,-19.91568 -22.85555,0.41278 16.69771,-14.64016 -21.27374,-8.36508 21.02922,-7.1358 -16.45319,-15.86944 22.15922,1.45491 -9.1278,-20.95781 19.91568,9.82413 -0.41278,-22.85555 14.64016,16.69771 8.36508,-21.27374 7.1358,21.02923 15.86944,-16.4532 -1.45492,22.15922 20.95782,-9.1278 -9.82413,19.91568 22.85555,-0.41278 -16.69772,14.64016 z" transform="matrix(1.2301 0 0 1.1997 -192.06 -266.1)" fill="#FFFFFF" fill-rule="evenodd"></path><path d="m142.18 184.6-10.861 8.04 5.353 4.423c13-10.048 22.25-19.231 29.48-34.471 1.695 20.342-16.951 66.004-65.884 66.508-52.371-0.044-70.543-48.492-68.522-67.366 9.621 17.455 15.492 25.966 30.594 35.054l4.6206-4.241-10.229-8.523 13.168-3.424-7.0846-11.924 13.796 1.005-1.7336-13.885 12.094 7.077 3.784-12.926 8.6895 10.411 8.1403-9.87 4.432 13.411 11.301-7.864-1.449 13.639 13.548-1.59-6.351 12.608 13.115 3.908z" fill="#FFFFFF" fill-rule="evenodd"></path></g></symbol>
+  <symbol id="flag-bd" viewBox="0 0 200 120">
+    <rect width="200" height="120" fill="#006A4E"></rect>
+    <circle cx="90" cy="60" r="30" fill="#F42A41"></circle>
+  </symbol>
+</svg>
+
 <div class="wrap">
   <header>
+    <div class="pair" aria-hidden="true">
+      <svg viewBox="0 0 410 520" style="width:36px"><use href="#flag-nepal"></use></svg>
+      <span class="x">×</span>
+      <svg viewBox="0 0 200 120" style="width:76px"><use href="#flag-bd"></use></svg>
+    </div>
     <div class="label">SCHOOL FESTIVAL</div>
     <h1>見たいサイトを選んでね</h1>
+    <p class="lead">気になるほうをタップ。見終わったら「メニューに戻る」で、ここに戻れます。</p>
   </header>
-  <main id="cards"></main>
+
+  <main>
+
+    <!-- ===== ネパール =====
+         書きかえる場所: group / 名前 / 説明 / タグ / href（URL） -->
+    <a class="card" href="https://skxm10.github.io/ProjectNepal/">
+      <div class="band">
+        <svg viewBox="0 0 410 520" style="width:74px" role="img" aria-label="ネパールの国旗"><use href="#flag-nepal"></use></svg>
+        <span class="badge">Group M</span>
+      </div>
+      <div class="body">
+        <h2 class="name">ネパール観光ガイド</h2>
+        <p class="desc">トレッキング・文化・野生動物サファリ。ネパールの旅を見つけよう。</p>
+        <ul class="tags">
+          <li>トレッキング</li><li>文化・寺院巡り</li><li>野生動物サファリ</li>
+        </ul>
+        <span class="go">サイトを見る <span class="arrow">→</span></span>
+      </div>
+    </a>
+
+    <!-- ===== バングラデシュ =====
+         書きかえる場所: group / 名前 / 説明 / タグ / href（URL） -->
+    <a class="card bd" href="https://rana1539.github.io/JOY-BANGLA/">
+      <div class="band">
+        <svg viewBox="0 0 200 120" style="width:154px" role="img" aria-label="バングラデシュの国旗"><use href="#flag-bd"></use></svg>
+        <span class="badge">Group L</span>
+      </div>
+      <div class="body">
+        <h2 class="name">Explore Bangladesh</h2>
+        <p class="desc">バングラデシュの美しい観光地、文化、自然、食べ物を楽しみましょう。</p>
+        <ul class="tags">
+          <li>観光地</li><li>文化</li><li>自然</li><li>食べ物</li>
+        </ul>
+        <span class="go">サイトを見る <span class="arrow">→</span></span>
+      </div>
+    </a>
+
+  </main>
+
+  <ol class="steps">
+    <li><b>1</b>見たいサイトを選ぶ</li>
+    <li><b>2</b>ゆっくり見る</li>
+    <li><b>3</b>「メニューに戻る」でここに戻る</li>
+  </ol>
+  <footer>GROUP M × GROUP L ・ SCHOOL FESTIVAL</footer>
 </div>
 
+<div id="offline" role="status">インターネットにつながっていません。Wi-Fiを確認してください。</div>
+
 <script>
-/* 国旗（そのまま・変更しなくてOK） */
-const FLAGS = {
-  nepal: `<svg role="img" aria-label="ネパールの国旗" viewBox="-4 -20 410 520" xmlns="http://www.w3.org/2000/svg"><g transform="matrix(1.0432 0 0 1.0432 -.0024051 -21.45)"><path d="m6.2712 489.83 363.1-0.01-237.66-241.01 246.61 0.29-372.03-237.62-0.0188 478.35z" fill="#DC143C" stroke="#003893" stroke-width="12.431" stroke-linejoin="miter" fill-rule="evenodd"></path><path d="m 296.97868,523.24292 -21.02922,7.1358 16.4532,15.86944 -22.15922,-1.45491 9.1278,20.95781 -19.91568,-9.82413 0.41278,22.85555 -14.64016,-16.69771 -8.36508,21.27374 -7.1358,-21.02923 -15.86944,16.4532 1.45491,-22.15922 -20.95781,9.1278 9.82413,-19.91568 -22.85555,0.41278 16.69771,-14.64016 -21.27374,-8.36508 21.02922,-7.1358 -16.45319,-15.86944 22.15922,1.45491 -9.1278,-20.95781 19.91568,9.82413 -0.41278,-22.85555 14.64016,16.69771 8.36508,-21.27374 7.1358,21.02923 15.86944,-16.4532 -1.45492,22.15922 20.95782,-9.1278 -9.82413,19.91568 22.85555,-0.41278 -16.69772,14.64016 z" transform="matrix(1.2301 0 0 1.1997 -192.06 -266.1)" fill="#FFFFFF" fill-rule="evenodd"></path><path d="m142.18 184.6-10.861 8.04 5.353 4.423c13-10.048 22.25-19.231 29.48-34.471 1.695 20.342-16.951 66.004-65.884 66.508-52.371-0.044-70.543-48.492-68.522-67.366 9.621 17.455 15.492 25.966 30.594 35.054l4.6206-4.241-10.229-8.523 13.168-3.424-7.0846-11.924 13.796 1.005-1.7336-13.885 12.094 7.077 3.784-12.926 8.6895 10.411 8.1403-9.87 4.432 13.411 11.301-7.864-1.449 13.639 13.548-1.59-6.351 12.608 13.115 3.908z" fill="#FFFFFF" fill-rule="evenodd"></path></g></svg>`,
-  bangladesh: `<svg role="img" aria-label="バングラデシュの国旗" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="120" fill="#006A4E"></rect><circle cx="90" cy="60" r="30" fill="#F42A41"></circle></svg>`
-};
+/* あってもなくてもリンクは動きます（動作を助けるだけの小さなコード） */
+(function () {
+  var bar = document.getElementById("offline");
+  function check() { bar.style.display = navigator.onLine ? "none" : "block"; }
+  window.addEventListener("online", check);
+  window.addEventListener("offline", check);
+  check();
 
-/* ============================================================
-   ここだけ書きかえてください！ (Edit ONLY this part)
-   各グループの「グループ名」「サイトの名前」「説明」「URL」
-   ============================================================ */
-const sites = [
-  {
-    group: "Group M",
-    accent: "#2B6CB0",                 // サイトの色（青）
-    flag: "nepal",
-    name:  "ネパール観光ガイド",
-    desc:  "トレッキング・文化・野生動物サファリ。ネパールの旅を見つけよう。",
-    url:   "https://skxm10.github.io/ProjectNepal/"
-  },
-  {
-    group: "Group L",                         // ← 相手のグループ名
-    accent: "#1F7A4D",                        // ← サイトの色（緑）
-    flag: "bangladesh",
-    name:  "Explore Bangladesh",                  // ← サイトの名前
-    desc:  "バングラデシュの美しい観光地、文化、自然、食べ物を楽しみましょう。",  // ← 短い説明
-    url:   "https://rana1539.github.io/JOY-BANGLA/"   // ← 相手のサイトのURL
-  }
-];
-/* ============================================================ */
-
-const root = document.getElementById("cards");
-sites.forEach(s => {
-  const a = document.createElement("a");
-  a.className = "card";
-  a.href = s.url;
-  // 同じタブで開く → 各サイトの「メニューに戻る」ボタンでこのページに戻れる
-  a.style.setProperty("--accent", s.accent);
-  const top = document.createElement("div");
-  const f = document.createElement("div"); f.className = "flag"; f.innerHTML = FLAGS[s.flag] || "";
-  const g = document.createElement("div"); g.className = "group"; g.textContent = s.group;
-  const n = document.createElement("div"); n.className = "name";  n.textContent = s.name;
-  const d = document.createElement("div"); d.className = "desc";  d.textContent = s.desc;
-  top.append(f, g, n, d); top.style.flex = "1";
-  const go = document.createElement("div"); go.className = "go"; go.textContent = "サイトを見る →";
-  a.append(top, go);
-  root.append(a);
-});
+  // 押したあと「開いています…」と表示。戻ってきたときは元に戻す
+  var cards = document.querySelectorAll("a.card");
+  cards.forEach(function (c) {
+    c.addEventListener("click", function () {
+      var go = c.querySelector(".go");
+      go.dataset.t = go.innerHTML;
+      go.innerHTML = "開いています…";
+      c.classList.add("opening");
+    });
+  });
+  window.addEventListener("pageshow", function () {
+    cards.forEach(function (c) {
+      var go = c.querySelector(".go");
+      if (go.dataset.t) { go.innerHTML = go.dataset.t; delete go.dataset.t; }
+      c.classList.remove("opening");
+    });
+  });
+})();
 </script>
 </body>
 </html>
